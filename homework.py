@@ -61,7 +61,7 @@ class Running(Training):
     CALORIES_MEAN_SPEED_MULTIPLIER = 18
     CALORIES_MEAN_SPEED_SHIFT = 1.79
     LEN_STEP = 1
-    
+
     def __init__(self,
                  action: int,
                  duration: float,
