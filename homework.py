@@ -43,12 +43,15 @@ class Training:
 
         return self.get_distance() / self.duration
 
+    def get_spent_calories(self) -> float:
+        pass
+
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
 
         return InfoMessage(self.__class__.__name__,
                            self.duration,
-                           self.get_distance,
+                           self.get_distance(),
                            self.get_mean_speed(),
                            self.get_spent_calories())
 
