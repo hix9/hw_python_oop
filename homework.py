@@ -9,7 +9,6 @@ class InfoMessage:
         self.calories = calories
 
     def get_message(self) -> str:
-
         return (f'Тип тренировки: {self.training_type}; '
                 f'Длительность: {self.duration} ч.; '
                 f'Дистанция: {self.distance} км; '
@@ -61,7 +60,8 @@ class Running(Training):
 
     CALORIES_MEAN_SPEED_MULTIPLIER = 18
     CALORIES_MEAN_SPEED_SHIFT = 1.79
-
+    LEN_STEP = 1
+    
     def __init__(self,
                  action: int,
                  duration: float,
@@ -146,7 +146,7 @@ def main(training: Training) -> InfoMessage:
 
     info: InfoMessage = training.show_training_info()
 
-    return print(info.get_message())
+    print(info.get_message())
 
 
 if __name__ == '__main__':
