@@ -12,7 +12,7 @@ class InfoMessage:
 
         return (f'Тип тренировки: {self.training_type}; '
                 f'Длительность: {self.duration} ч.; '
-                f'Дистанция: {self.distance} км;'
+                f'Дистанция: {self.distance} км; '
                 f'Ср. скорость: {self.speed:.3f} км/ч; '
                 f'Потрачено ккал: {self.calories:.3f}.')
 
@@ -71,10 +71,9 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         return ((self.CALORIES_MEAN_SPEED_MULTIPLIER
-                * (self.action * self.LEN_STEP / self.M_IN_KM) / self.duration
+                * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT)
-                * self.weight / self.M_IN_KM * self.action
-                * self.LEN_STEP / self.M_IN_KM)
+                * self.weight / self.M_IN_KM * self.get_distance())
 
 
 class SportsWalking(Training):
@@ -97,8 +96,8 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         return ((self.CALORIES_WEIGHT_MULTIPLIER * self.weight
-                 + ((self.get_mean_speed() * self.KMH_IN_MSEC)**2 / self.height
-                    / self.CM_IN_M) * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
+                + ((self.get_mean_speed() * self.KMH_IN_MSEC)**2 / self.height
+                 / self.CM_IN_M) * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
                  * self.weight) * self.duration * self.MIN_IN_H)
 
 
@@ -147,7 +146,7 @@ def main(training: Training) -> InfoMessage:
 
     info: InfoMessage = training.show_training_info()
 
-    print(info.get_message())
+    return print(info.get_message())
 
 
 if __name__ == '__main__':
