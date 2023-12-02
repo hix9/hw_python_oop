@@ -1,3 +1,6 @@
+"""Программа Фитнес-трекер."""
+
+
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -43,6 +46,7 @@ class Training:
         return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
+        """Получить количество затраченных калорий."""
 
         pass
 
@@ -71,6 +75,8 @@ class Running(Training):
         self.weight = weight
 
     def get_spent_calories(self) -> float:
+        """Получить количество затраченных калорий."""
+
         return (((self.CALORIES_MEAN_SPEED_MULTIPLIER
                 * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT)
