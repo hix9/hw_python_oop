@@ -73,7 +73,7 @@ class Running(Training):
         return ((self.CALORIES_MEAN_SPEED_MULTIPLIER
                 * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT)
-                * (self.weight / self.M_IN_KM * self.duration))
+                * (self.weight / self.M_IN_KM) * self.duration)
 
 
 class SportsWalking(Training):
@@ -137,8 +137,7 @@ def read_package(workout_type: str, data: list[int]) -> Training:
                   'WLK': SportsWalking
                   }
 
-    class_type: Training = Dictionary[workout_type](*data)
-    return class_type
+    return Dictionary[workout_type](*data)
 
 
 def main(training: Training) -> InfoMessage:
