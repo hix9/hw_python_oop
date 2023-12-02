@@ -1,6 +1,3 @@
-"""Программа Фитнес-трекер."""
-
-
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -76,7 +73,7 @@ class Running(Training):
         return ((self.CALORIES_MEAN_SPEED_MULTIPLIER
                 * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT)
-                * (self.weight / (self.M_IN_KM * self.duration)))
+                * (self.weight / self.M_IN_KM * self.duration))
 
 
 class SportsWalking(Training):
