@@ -1,3 +1,6 @@
+"""Программа Фитнес-трекер."""
+
+
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -73,7 +76,7 @@ class Running(Training):
         return ((self.CALORIES_MEAN_SPEED_MULTIPLIER
                 * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT)
-                * self.weight / self.M_IN_KM * self.get_distance())
+                * self.weight / self.M_IN_KM * self.duration)
 
 
 class SportsWalking(Training):
@@ -120,13 +123,13 @@ class Swimming(Training):
 
         super().__init__(action, duration, weight)
 
-    def get_spent_calories(self) -> float:
-        return ((self.get_mean_speed() + self.COEFFICENT_MEAN_SPEED)
-                * self.COEFFICENT_SWIM * self.weight * self.duration)
-
     def get_mean_speed(self) -> float:
         return ((self.length_pool * self.count_pool)
                 / self.M_IN_KM / self.duration)
+
+    def get_spent_calories(self) -> float:
+        return ((self.get_mean_speed() + self.COEFFICENT_MEAN_SPEED)
+                * self.COEFFICENT_SWIM * self.weight * self.duration)
 
 
 def read_package(workout_type: str, data: list[int]) -> Training:
