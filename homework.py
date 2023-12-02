@@ -149,7 +149,7 @@ def main(training: Training) -> InfoMessage:
 
     info: InfoMessage = training.show_training_info()
 
-    print(info.get_message())
+    return print(info.get_message())
 
 
 if __name__ == '__main__':
