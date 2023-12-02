@@ -1,6 +1,3 @@
-"""Finness-tracker."""
-
-
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -46,6 +43,7 @@ class Training:
         return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
+
         pass
 
     def show_training_info(self) -> InfoMessage:
@@ -63,7 +61,6 @@ class Running(Training):
 
     CALORIES_MEAN_SPEED_MULTIPLIER = 18
     CALORIES_MEAN_SPEED_SHIFT = 1.79
-    LEN_STEP = 1
     MIN_IN_H = 60
 
     def __init__(self,
@@ -100,6 +97,7 @@ class SportsWalking(Training):
         self.weight = weight
 
     def get_spent_calories(self) -> float:
+
         return ((self.CALORIES_WEIGHT_MULTIPLIER * self.weight
                 + ((self.get_mean_speed() * self.KMH_IN_MSEC)**2 / (self.height
                  / self.CM_IN_M)) * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
