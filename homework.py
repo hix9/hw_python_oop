@@ -70,11 +70,10 @@ class Running(Training):
         return (
             (
                 (
-                 self.CALORIES_MEAN_SPEED_MULTIPLIER
-                 * self.get_mean_speed()
-                 + self.CALORIES_MEAN_SPEED_SHIFT
-                )
-                *
+                    self.CALORIES_MEAN_SPEED_MULTIPLIER
+                    * self.get_mean_speed()
+                    + self.CALORIES_MEAN_SPEED_SHIFT
+                ) *
                 (
                     self.weight / self.M_IN_KM
                 )
@@ -104,12 +103,16 @@ class SportsWalking(Training):
             (
                 self.CALORIES_WEIGHT_MULTIPLIER * self.weight
                 + (
-                    (self.get_mean_speed() * self.KMH_IN_MSEC)**2 /
-                    (self.height / self.CM_IN_M)
-                  )
-                * self.CALORIES_WEIGHT_MULTIPLIER_2 * self.weight
-            ) * self.duration * self.MIN_IN_H
-                )
+                    (
+                        self.get_mean_speed() * self.KMH_IN_MSEC
+                        )**2 /
+                    (
+                        self.height / self.CM_IN_M
+                        )
+                    ) * self.CALORIES_WEIGHT_MULTIPLIER_2
+                      * self.weight
+                ) * self.duration * self.MIN_IN_H
+                    )
 
 
 @dataclass
