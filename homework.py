@@ -66,17 +66,22 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-# У меня не получается сделать перенос без отрыва от скобок,
-# переменные имеют длинные названия.
-# С отрывом у меня тоже не получается,
-# локально Flake8 не видит ошибок, но при тестах возникает
-# множество ошибок, возможно мне нужен ещё линтер?
 
-        return (((self.CALORIES_MEAN_SPEED_MULTIPLIER
-                 * self.get_mean_speed()
-                 + self.CALORIES_MEAN_SPEED_SHIFT)
-                 * (self.weight / self.M_IN_KM))
-                * self.duration * self.MIN_IN_H)
+        return (
+            (
+                (
+                    self.CALORIES_MEAN_SPEED_MULTIPLIER
+                    * self.get_mean_speed()
+                    + self.CALORIES_MEAN_SPEED_SHIFT
+                )
+                * (
+                    self.weight
+                    / self.M_IN_KM
+                )
+            )
+            * self.duration
+            * self.MIN_IN_H
+        )
 
 
 @dataclass
@@ -96,11 +101,26 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
 
-        return ((self.CALORIES_WEIGHT_MULTIPLIER * self.weight
-                 + ((self.get_mean_speed() * self.KMH_IN_MSEC)
-                    ** 2 / (self.height / self.CM_IN_M))
-                * self.CALORIES_WEIGHT_MULTIPLIER_2 * self.weight)
-                * self.duration * self.MIN_IN_H)
+        return (
+            (
+                self.CALORIES_WEIGHT_MULTIPLIER
+                * self.weight
+                + (
+                    (
+                        self.get_mean_speed()
+                        * self.KMH_IN_MSEC
+                    )
+                    ** 2 / (
+                        self.height
+                        / self.CM_IN_M
+                    )
+                )
+                * self.CALORIES_WEIGHT_MULTIPLIER_2
+                * self.weight
+            )
+            * self.duration
+            * self.MIN_IN_H
+        )
 
 
 @dataclass
@@ -118,12 +138,25 @@ class Swimming(Training):
     count_pool: int
 
     def get_mean_speed(self) -> float:
-        return ((self.length_pool * self.count_pool)
-                / self.M_IN_KM / self.duration)
+        return (
+            (
+                self.length_pool
+                * self.count_pool
+            )
+            / self.M_IN_KM
+            / self.duration
+        )
 
     def get_spent_calories(self) -> float:
-        return ((self.get_mean_speed() + self.MEAN_SPEED_MULTIPLIER)
-                * self.SWIM_WEIGHT_MULTIPLIER * self.weight * self.duration)
+        return (
+            (
+                self.get_mean_speed()
+                + self.MEAN_SPEED_MULTIPLIER
+            )
+            * self.SWIM_WEIGHT_MULTIPLIER
+            * self.weight
+            * self.duration
+        )
 
 
 TRANING_TYPE = {}
