@@ -92,8 +92,6 @@ class SportsWalking(Training):
     KMH_IN_MSEC = 0.278
     CM_IN_M = 100
 
-    duration: float
-    weight: float
     height: int
 
     def get_spent_calories(self) -> float:
@@ -125,12 +123,9 @@ class Swimming(Training):
     """Тренировка: плавание."""
 
     LEN_STEP = 1.38
-    MEAN_SPEED_MULTIPLIER = 1.1
+    MEAN_SPEED_CORRECTION = 1.1
     SWIM_WEIGHT_MULTIPLIER = 2
 
-    action: int
-    duration: float
-    weight: float
     length_pool: float
     count_pool: int
 
@@ -148,7 +143,7 @@ class Swimming(Training):
         return (
             (
                 self.get_mean_speed()
-                + self.MEAN_SPEED_MULTIPLIER
+                + self.MEAN_SPEED_CORRECTION
             )
             * self.SWIM_WEIGHT_MULTIPLIER
             * self.weight
@@ -167,7 +162,7 @@ def read_package(workout_type: str, data: list[int]) -> Training:
 
     if workout_type not in TRANING_TYPES:
 
-        raise TypeError('Работает только со строковыми данными.')
+        raise ValueError('Не подходящее значение.')
 
     return TRANING_TYPES[workout_type](*data)
 
