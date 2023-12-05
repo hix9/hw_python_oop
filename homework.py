@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 """Программа Фитнес-трекер."""
+from dataclasses import dataclass
 
 
 @dataclass
@@ -30,7 +30,6 @@ class Training:
 
     M_IN_KM = 1000
     LEN_STEP = 0.65
-    CM_IN_M = 100
     MIN_IN_H = 60
 
     def get_distance(self) -> float:
@@ -43,7 +42,7 @@ class Training:
 
         return self.get_distance() / self.duration
 
-    def get_spent_calories(self) -> float:
+    def get_spent_calories(self):
         """Получить количество затраченных калорий."""
 
         raise NotImplementedError
@@ -88,13 +87,11 @@ class Running(Training):
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
 
-    LEN_STEP = 0.65
     CALORIES_WEIGHT_MULTIPLIER = 0.035
     CALORIES_WEIGHT_MULTIPLIER_2 = 0.029
     KMH_IN_MSEC = 0.278
     CM_IN_M = 100
 
-    action: int
     duration: float
     weight: float
     height: int
@@ -159,22 +156,20 @@ class Swimming(Training):
         )
 
 
-TRANING_TYPE = {}
+TRANING_TYPES: dict = {'SWM': Swimming,
+                       'RUN': Running,
+                       'WLK': SportsWalking
+                       }
 
 
 def read_package(workout_type: str, data: list[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
 
-    TRANING_TYPE = {'SWM': Swimming,
-                    'RUN': Running,
-                    'WLK': SportsWalking
-                    }
-
-    if workout_type not in TRANING_TYPE:
+    if workout_type not in TRANING_TYPES:
 
         raise TypeError('Работает только со строковыми данными.')
 
-    return TRANING_TYPE[workout_type](*data)
+    return TRANING_TYPES[workout_type](*data)
 
 
 def main(training: Training) -> InfoMessage:
